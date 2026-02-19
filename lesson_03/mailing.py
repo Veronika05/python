@@ -8,4 +8,4 @@ class Mailing:
         self.track = track
     
     def __str__(self):
-        return f"Отправление {self.track} из {self.from_address} в {self.to_address}.Стоимость {self.cost} рублей."
+        return f'Отправление {self.track} из {self.from_address.index}, {self.from_address.city}, {self.from_address.street}, {self.from_address.home} - {self.from_address.flat} в {self.to_address.index}, {self.to_address.city}, {self.to_address.street}, {self.to_address.home} - {self.to_address.flat}. Стоимость {self.cost} рублей.'
