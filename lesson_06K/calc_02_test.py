@@ -22,7 +22,7 @@ def test_calculator(browser):
     browser.find_element(By.XPATH, "//span[text()='8']").click()
     browser.find_element(By.XPATH, "//span[text()='=']").click()
     
-    result = WebDriverWait(browser, 50).until(
+    WebDriverWait(browser, 50).until(
     EC.text_to_be_present_in_element((By.CSS_SELECTOR, ".screen"), "15")
 )
     result = browser.find_element(By.CSS_SELECTOR, ".screen").text
