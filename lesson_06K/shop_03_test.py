@@ -45,6 +45,6 @@ def test_swag_labs(browser):
     wait = WebDriverWait(browser, 10)
     wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR,".summary_total_label")))
 
-    print(browser.find_element(By.CSS_SELECTOR, ".summary_total_label").text)
-
-    browser.quit()
+    total = browser.find_element(By.CSS_SELECTOR, ".summary_total_label").text
+    
+    assert total == "Total:$58.29"

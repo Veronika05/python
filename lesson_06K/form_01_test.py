@@ -62,7 +62,7 @@ def test_form(browser):
         class_atr = element.get_attribute('class') or ''
         assert "alert-success" in class_atr
 
-    browser.quit()
+    
 
 
 

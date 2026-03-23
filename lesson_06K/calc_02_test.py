@@ -17,12 +17,13 @@ def test_calculator(browser):
     delay = browser.find_element(By.CSS_SELECTOR, "#delay")
     delay.clear()
     delay.send_keys("45")
-    button_1 = browser.find_element(By.XPATH, "//span[text()='7']").click()
-    button_2 = browser.find_element(By.XPATH, "//span[text()='+']").click()
-    button_3 = browser.find_element(By.XPATH, "//span[text()='8']").click()
-    button_4 = browser.find_element(By.XPATH, "//span[text()='=']").click()
+    browser.find_element(By.XPATH, "//span[text()='7']").click()
+    browser.find_element(By.XPATH, "//span[text()='+']").click()
+    browser.find_element(By.XPATH, "//span[text()='8']").click()
+    browser.find_element(By.XPATH, "//span[text()='=']").click()
     
     result = WebDriverWait(browser, 50).until(
     EC.text_to_be_present_in_element((By.CSS_SELECTOR, ".screen"), "15")
 )
-    assert result
+    result = browser.find_element(By.CSS_SELECTOR, ".screen").text
+    assert result == "15"
