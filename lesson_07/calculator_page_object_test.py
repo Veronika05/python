@@ -1,7 +1,10 @@
 import pytest
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-from pages.CalcPages import CalcPage
+from pages.calcPages import CalcPage
 
 @pytest.fixture
 def driver():
@@ -17,7 +20,8 @@ def test_calculator(driver):
     calc_page.open()
     calc_page.delay_input_field("45")
     calc_page.press_buttons()
-    calc_page.result_page()
+    result = calc_page.result_page()
+    assert result == "15"
 
 
 

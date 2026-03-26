@@ -24,5 +24,4 @@ class CalcPage:
         WebDriverWait(self.driver, 50).until(
             EC.text_to_be_present_in_element((By.CSS_SELECTOR, ".screen"), "15")
             )
-        # result = self.driver.find_element(By.CSS_SELECTOR, ".screen").text
-        # assert result == "15"
+        return self.driver.find_element(By.CSS_SELECTOR, ".screen").text

@@ -6,3 +6,5 @@ class CartPage:
 
     def click_checkout(self):
         checkout = self.driver.find_element(By.CSS_SELECTOR, "#checkout").click()
+
+    

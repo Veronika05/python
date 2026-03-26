@@ -1,15 +1,10 @@
 import pytest
 from selenium import webdriver
-from selenium.webdriver.firefox.service import Service as FirefoxService
-from webdriver_manager.firefox import GeckoDriverManager
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
-from pages.AuthPage import AuthPage
-from pages.MainPage import MainPage
-from pages.CartPage import CartPage
-from pages.OrderPage import OrderPage
+from pages.authPage import AuthPage
+from pages.mainPage import MainPage
+from pages.cartPage import CartPage
+from pages.orderPage import OrderPage
 
 @pytest.fixture
 def driver():
@@ -39,3 +34,5 @@ def test_swag_labs(driver):
     order_page.fill_last_name("Barhonova")
     order_page.fill_code("429147")
     order_page.click_cont()
+    total = order_page.get_summary()
+    assert total == "Total: $58.29"
