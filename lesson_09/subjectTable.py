@@ -1,11 +1,19 @@
 from sqlalchemy import create_engine, text
 
+
 class SubjectTable:
     __scripts = {
-        "select" : text("SELECT * FROM subject"),
-        "insert_new" : text("insert into subject(\"subject_title\") values (:new_title)"),
-        "update" : text("update subject set subject_title = :new_title where subject_id = :id"),
-        "delete" : text("DELETE FROM subject WHERE subject_id = :id")
+        "select": text("SELECT * FROM subject"),
+        "insert_new": text(
+            "INSERT INTO subject(\"subject_title\")"
+            "VALUES(:new_title)"
+        ),
+        "update": text(
+            "UPDATE subject"
+            "SET subject_title = :new_title"
+            "WHERE subject_title = :title"
+        ),
+        "delete": text("DELETE FROM subject WHERE subject_title = :title")
     }
 
     def __init__(self, connection_string):
@@ -17,29 +25,32 @@ class SubjectTable:
         rows = result.mappings().all()
         conn.close()
         return rows
-    
+
     def add_subject(self, title):
         connection = self.__db.connect()
         transaction = connection.begin()
-        result = connection.execute(self.__scripts["insert_new"], {"new_title" :title})
+        result = connection.execute(
+            self.__scripts["insert_new"],
+            {"new_title": title}
+            )
         transaction.commit()
         connection.close()
         return result
 
-    def update(self, id, new_title):
+    def update(self, title, new_title):
         connection = self.__db.connect()
         transaction = connection.begin()
-        connection.execute(self.__scripts["update"], {"id": id, "new_title": new_title})
-        
+        connection.execute(
+            self.__scripts["update"],
+            {"title": title, "new_title": new_title}
+        )
         transaction.commit()
         connection.close()
 
-    def delete(self, id):
+    def delete(self, title):
         connection = self.__db.connect()
         transaction = connection.begin()
-        connection.execute(self.__scripts["delete"], {"id": id})
+        connection.execute(self.__scripts["delete"], {"title": title})
 
         transaction.commit()
         connection.close()
-
-
